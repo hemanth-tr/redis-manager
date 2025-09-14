@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using RedisSessionManager.Services;
+using RedisSessionManager.Stubs;
 using RedisSessionManager.ViewModels;
 
 namespace RedisSessionManager
@@ -19,7 +20,8 @@ namespace RedisSessionManager
             var services = new ServiceCollection();
 
             // Register services and viewmodels
-            services.AddSingleton<IRedisManager, RedisManager>();
+            services.AddSingleton<IRedisManager, StubRedisManager>();
+            services.AddSingleton<IRedisClient, RedisClient>();
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<RedisKeysViewModel>();
 

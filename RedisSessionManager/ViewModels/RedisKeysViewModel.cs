@@ -8,6 +8,10 @@ namespace RedisSessionManager.ViewModels
     {
         public ObservableCollection<RedisData> RedisData { get; set; }
 
+        public double NumberOfKeys { get; set; }
+
+        public long TotalSize { get; set; }
+
         private IRedisManager redisManager;
 
         public RedisKeysViewModel(IRedisManager redisManager)
@@ -16,6 +20,13 @@ namespace RedisSessionManager.ViewModels
             this.redisManager = redisManager ?? throw new ArgumentNullException(nameof(redisManager));
 
             this.PopulateData();
+            this.UpdateDashboard();
+        }
+
+        private void UpdateDashboard()
+        {
+            this.NumberOfKeys = this.RedisData.Count;
+            this.TotalSize = this.RedisData.Sum(x => x.Size);
         }
 
         private void PopulateData()
