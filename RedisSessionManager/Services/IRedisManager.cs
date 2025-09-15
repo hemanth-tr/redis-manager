@@ -6,7 +6,9 @@ namespace RedisSessionManager.Services
     {
         string Get(string key);
         IEnumerable<string> GetAllKeys();
-        Task<IEnumerable<RedisData>> GetAllDataAsync();
         IEnumerable<RedisData> GetAllData();
+        Task<IEnumerable<RedisData>> GetAllDataAsync();
+        IEnumerable<RedisData> GetDataByPattern(string pattern);
+        Task<IEnumerable<RedisData>> GetDataByPatternAsync(string pattern);
     }
 }

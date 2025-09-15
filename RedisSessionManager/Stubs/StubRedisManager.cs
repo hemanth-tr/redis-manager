@@ -34,6 +34,17 @@ namespace RedisSessionManager.Stubs
             return _redisDatas.Select(x => x.Key);
         }
 
+        public IEnumerable<RedisData> GetDataByPattern(string pattern)
+        {
+            return _redisDatas.Where(x => x.Key.Contains(pattern, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public Task<IEnumerable<RedisData>> GetDataByPatternAsync(string pattern)
+        {
+            var result = _redisDatas.Where(x => x.Key.Contains(pattern, StringComparison.OrdinalIgnoreCase));
+            return Task.FromResult<IEnumerable<RedisData>>(result);
+        }
+
         private void PopulateData()
         {
             _redisDatas.Add(new RedisData { Key = "Name", Value = "Hemanth" });

@@ -27,12 +27,20 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <StackPanel Orientation="Horizontal">
-                <StackPanel>
-                    <TextBox Width="150" Height="25" Padding="4" />
-                    <TextBlock FontSize="10" Foreground="Gray" Text="* Enter search pattern" />
+            <StackPanel Orientation="Vertical">
+                
+                <TextBlock FontSize="10" Foreground="Gray" Text="* Enter search pattern" />
+                
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBox Width="150" Height="25" Padding="4" Text="{Binding SearchPattern}" />
+                    <Button Width="60" Height="25" Margin="5,0,0,0" VerticalAlignment="Center" Content="Search" Command="{Binding SearchCommand}" />
                 </StackPanel>
-                <Button Margin="5,0,0,0" Width="60" Height="25"  VerticalAlignment="Top">Refresh</Button>
+                
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <CheckBox IsChecked="{Binding SearchInCurrentList}" />
+                    <TextBlock FontSize="10" Margin="5,0,0,0" Text="Search in the current list" />
+                </StackPanel>
+                
             </StackPanel>
 
         </StackPanel>

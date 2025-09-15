@@ -55,6 +55,36 @@ namespace RedisSessionManager.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<RedisData> GetDataByPattern(string pattern)
+        {
+            var result = new List<RedisData>();
+
+            foreach (var key in _server.Keys(pattern: pattern))
+            {
+                var value = _database.StringGet(key);
+                long size = this.GetSize(key);
+
+                result.Add(new RedisData { Key = key, Value = value, Size = size });
+            }
+
+            return result;
+        }
+
+        public async Task<IEnumerable<RedisData>> GetDataByPatternAsync(string pattern)
+        {
+            var result = new List<RedisData>();
+
+            foreach (var key in _server.Keys(pattern: pattern))
+            {
+                var value = await _database.StringGetAsync(key);
+                long size = this.GetSize(key);
+
+                result.Add(new RedisData { Key = key, Value = value, Size = size });
+            }
+
+            return result;
+        }
+
         private long GetSize(string key)
         {
             long size = -1;
